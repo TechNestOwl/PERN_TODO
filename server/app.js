@@ -9,11 +9,16 @@ const pool = require('./db');
 //Middleware
 app.use(cors());
 app.use(express.json());//req.body
+// app.use(express.urlencoded());
+
+// app.get('/', (req,res) => {
+//     res.send("hello")
+// });
 
 
 //CREATE
 
-app.post("/todo", async (req,res) => {
+app.post("/todos", async (req,res) => {
     try{
 
         const {description} = req.body;
@@ -21,7 +26,6 @@ app.post("/todo", async (req,res) => {
             "INSERT INTO todo (description) VALUES ($1)",
             [description]
         );
-        
         res.json(newTodo);
     }catch(err){
         console.error(err.message);
